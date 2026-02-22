@@ -149,7 +149,6 @@ else:
     st.write("Please upload a network capture file (PCAP) above to start the behavioral analysis engine.")
     
     st.markdown("---")
-    st.warning("💡 **Testing?** 5 sample files are in `test_samples/` (Normal, Port Scan, SYN Flood, DNS Tunnel, and Mixed).")
     
     col1, col2 = st.columns(2)
     with col1:
