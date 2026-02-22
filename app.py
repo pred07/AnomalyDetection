@@ -54,10 +54,7 @@ st.markdown("""
 st.title("🛡️ NetShield: Network Anomaly Discovery")
 st.markdown("Advanced PCAP analysis with rule-based signature matching and statistical scoring.")
 
-# INITIAL UPLOAD CONTAINER (Always visible if no file analyzed yet or to re-upload)
-if 'analyzed' not in st.session_state:
-    st.session_state.analyzed = False
-
+# INITIAL UPLOAD CONTAINER
 uploaded_file = st.file_uploader("📂 Drag and drop or Click to upload PCAP/PCAPNG", type=['pcap', 'pcapng'], key="main_uploader")
 
 if uploaded_file:
@@ -92,7 +89,6 @@ if uploaded_file:
             threat_scores = calculate_threat_scores(features_df, all_alerts)
             
             progress_bar.progress(100, text="Analysis Complete!")
-            st.session_state.analyzed = True
 
             # --- SECTION 2: Traffic Overview ---
             st.header("📈 Traffic Overview")
@@ -153,6 +149,7 @@ else:
     st.write("Please upload a network capture file (PCAP) above to start the behavioral analysis engine.")
     
     st.markdown("---")
+    st.warning("💡 **Testing?** 5 sample files are in `test_samples/` (Normal, Port Scan, SYN Flood, DNS Tunnel, and Mixed).")
     
     col1, col2 = st.columns(2)
     with col1:
@@ -166,10 +163,10 @@ else:
         st.write("- **Traffic Timeline**")
         st.write("- **PDF Reporting**")
 
-# Sidebar just for info now
+# Sidebar
 with st.sidebar:
     st.header("System Status")
     st.success("✅ Engine Online")
-    st.info("No external API dependencies. Analysis is 100% local.")
+    st.info("Analysis is 100% local.")
     if st.button("Reset Analysis"):
-        st.experimental_rerun()
+        st.rerun()
